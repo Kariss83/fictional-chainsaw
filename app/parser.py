@@ -1,6 +1,6 @@
 import re
 
-from .CONSTANTS import STOPWORDS, PONCTUATION, ACCENTS, QUESTIONS
+from .CONSTANTS import STOPWORDS, ACCENTS, QUESTIONS
 
 
 class Parser():
@@ -8,10 +8,9 @@ class Parser():
     request that we will be able to send to the google API
     """
 
-    def __init__(self, phrase, stopwords, ponctuation, accents, question_bloc):
+    def __init__(self, phrase, stopwords, accents, question_bloc):
         self.phrase = phrase
         self.stopwords = stopwords
-        self.ponctuation = ponctuation
         self.accents = accents
         self.questions = question_bloc
 
@@ -33,7 +32,8 @@ class Parser():
             match = re.search(r"l'adresse de (?P<lieu>[^,;.:?!]*)[,;.:?!]?.*$",
                               self.phrase
                              )
-        self.phrase = str(match.group('lieu'))
+        if match != None:
+            self.phrase = str(match.group('lieu'))
         return self.phrase
 
     def clean(self):
@@ -46,5 +46,5 @@ class Parser():
 
 if __name__ == '__main__':
     user_input = str(input())
-    parser = Parser("bonjour", STOPWORDS, PONCTUATION, ACCENTS, QUESTIONS)
+    parser = Parser("bonjour", STOPWORDS, ACCENTS, QUESTIONS)
     print(parser.remove_stop_words(STOPWORDS, user_input))

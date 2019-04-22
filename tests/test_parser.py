@@ -8,7 +8,6 @@ class TestParserPurBeurre():
         parser = Parser(
             "bienvenue à lès brignoles",
             STOPWORDS,
-            PONCTUATION,
             ACCENTS,
             QUESTIONS
         )
@@ -19,7 +18,6 @@ class TestParserPurBeurre():
         parser = Parser(
             "la tour eiffel",
             STOPWORDS,
-            PONCTUATION,
             ACCENTS,
             QUESTIONS
         )
@@ -30,7 +28,6 @@ class TestParserPurBeurre():
         parser = Parser(
             "Bonjour Grandpy, peux-tu me dire l'adresse de la tour Eiffel?",
             STOPWORDS,
-            PONCTUATION,
             ACCENTS,
             QUESTIONS
         )
@@ -41,7 +38,6 @@ class TestParserPurBeurre():
         parser = Parser(
             "Bonjour Grandpy, peux-tu me dire l'adresse de la tour Eiffèl?",
             STOPWORDS,
-            PONCTUATION,
             ACCENTS,
             QUESTIONS
         )

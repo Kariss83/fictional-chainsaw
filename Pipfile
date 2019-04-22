@@ -9,6 +9,8 @@ flake8 = "*"
 autopep8 = "*"
 
 [packages]
+googlemaps = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"
