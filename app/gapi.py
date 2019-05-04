@@ -17,15 +17,23 @@ class GAPICommunicant():
         self.url = 'https://maps.googleapis.com/maps/api/geocode/json?'
         self.apikey = os.environ['GAPIKEY']
         self.response = None
-
-    def send_requests_for_geocoding(self):
         self.payload = {
             'key': self.apikey,
             'address': self.address_str
         }
-        response = requests.get(self.url, self.payload)
-        response_json = response.json()
+    
+    def make_requests_to_geocoding_API(self):
+        self.response = requests.get(self.url, self.payload)
+        if self.response.ok:
+            return True
+        else:
+            return None
+
+    def get_data_from_geocoding(self):
+        response_json = self.response.json()
         return response_json['results'][0]['geometry']['location']
+
+        
 
 if __name__ == '__main__':
     parser = Parser("1600 Amphitheatre Parkway, Mountain View, CA",
