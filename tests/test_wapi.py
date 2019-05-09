@@ -16,7 +16,7 @@ class MockGetGeo():
         self.response = {
             "query": {
 				"geosearch":[{
-					"pageid":6422233,
+					"pageid":736,
 					"ns":0,
 					"title":"Academy of Art University",
 					"lat":37.78785,
@@ -100,7 +100,7 @@ class Tests_WAPIcommunicant():
 		wcommunicant = WAPICommunicant(gcommunicant)
 		wcommunicant.make_requests_to_wikigeo_api()
 		result = wcommunicant.get_pageid_of_close_point_of_interest()
-		assert result == 6422233
+		assert result == 736
 
 	def test_communicant_can_get_info_from_page(self, monkeypatch):
 		"""Docstring
@@ -122,6 +122,7 @@ class Tests_WAPIcommunicant():
 			mockget = MockGetPages()
 			return mockget
 		monkeypatch.setattr('requests.get', mock_requests_get_method)
+		wcommunicant.get_pageid_of_close_point_of_interest()
 		result = wcommunicant.get_data_from_page()
 		assert result == """Albert Einstein ( EYEN-styne; German:
 						[ˈalbɛɐ̯t ˈʔaɪnʃtaɪn] (listen); 14 March 1879 – 18
