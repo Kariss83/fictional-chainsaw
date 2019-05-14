@@ -15,15 +15,16 @@ class GAPICommunicant():
         self.address_str = parser.phrase
         self.payload = None
         self.url = 'https://maps.googleapis.com/maps/api/geocode/json?'
-        self.apikey = os.environ['GAPIKEY']
+        self._apikey = os.environ['GAPIKEY']
         self.response = None
-        self.payload = {
-            'key': self.apikey,
-            'address': self.address_str
-        }
+        
     
     def make_requests_to_geocoding_API(self):
-        self.response = requests.get(self.url, self.payload)
+        payload = {
+            'key': self._apikey,
+            'address': self.address_str
+        }
+        self.response = requests.get(self.url, payload)
         if self.response.ok:
             return True
         else:

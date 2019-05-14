@@ -29,9 +29,11 @@ class Parser():
 
     def get_end_of_question(self):
         for block in self.questions:
-            match = re.search(r"l'adresse de (?P<lieu>[^,;.:?!]*)[,;.:?!]?.*$",
-                              self.phrase
-                             )
+            match = re.search(
+                r"(l'adresse de |ou se trouve |ou est |ou se situe| du cote de)"
+                "(?P<lieu>[^,;.:?!]*)[,;.:?!]?.*$",
+                self.phrase
+            )
         if match != None:
             self.phrase = str(match.group('lieu'))
         return self.phrase

@@ -44,6 +44,3 @@ class TestParserPurBeurre():
         result = parser.clean()
         assert result == "tour eiffel"
 
-# module utiliser par google appelé googlemaps avec un pipenv.
-# py media wiki
-# requests sur mediawiki, se servir de la doc pour trouver les exemples

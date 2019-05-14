@@ -11,29 +11,25 @@ class WAPICommunicant():
 	"""This class is designed to make communication with wikimedia API.
 	"""
 	def __init__(self, gcommunicant):
-		self.coord_raw = gcommunicant.get_data_from_geocoding()
-		self.lat = str(self.coord_raw['lat'])
-		self.lng = str(self.coord_raw['lng'])
-		self.coords = f"{self.lat}|{self.lng}"
-		self.url = 'https://en.wikipedia.org/w/api.php?'
-		self.payload = None
+		self._coord_raw = gcommunicant.get_data_from_geocoding()
+		self._lat = str(self._coord_raw['lat'])
+		self._lng = str(self._coord_raw['lng'])
+		self._coords = f"{self._lat}|{self._lng}"
+		self._url = 'https://en.wikipedia.org/w/api.php?'
 		self.response = None
-		self.response_json = None
-		self.response_page = None
-		self.response_page_json = None
 		self.pageid = None
 
 	def make_requests_to_wikigeo_api(self):
 		"""This method is used to make the HTML request.
 		"""
-		self.payload = {
+		payload = {
 			'action': 'query',
 			'format': 'json',
-			'gscoord': self.coords,
+			'gscoord': self._coords,
 			'gsradius': 10000,
 			'list': 'geosearch'
 		}
-		self.response = requests.get(self.url, self.payload)
+		self.response = requests.get(self._url, payload)
 		if self.response.ok:
 			return True
 		else:
@@ -43,20 +39,20 @@ class WAPICommunicant():
 		"""This method will retrieve page id of a point of interest
 		close to the coordinates.
 		"""
-		self.response_json = self.response.json()
-		self.pageid = self.response_json['query']['geosearch'][0]['pageid']
-		return self.response_json['query']['geosearch'][0]['pageid']
+		response_json = self.response.json()
+		self.pageid = response_json['query']['geosearch'][0]['pageid']
+		return self.pageid
 
 	def get_data_from_page(self):
-		self.payload = {
+		payload = {
 			'action': 'query',
 			'format': 'json',
 			'pageids': self.pageid,
 			'prop': 'extract'
 		}
-		self.response_page = requests.get(self.url, self.payload)
-		self.response_page_json = self.response_page.json()['query']['pages']
-		return self.response_page_json[str(self.pageid)]['extract']
+		response_page = requests.get(self._url, payload)
+		response_page_json = response_page.json()['query']['pages']
+		return response_page_json[str(self.pageid)]['extract']
 		
 
 if __name__ == "__main__":
