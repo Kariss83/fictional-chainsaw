@@ -44,7 +44,13 @@ class Tests_WAPIcommunicant():
 	def test_communicant_can_get_info_from_page(self, monkeypatch):
 		"""Docstring
 		"""
+		def MockInit(self):
+			self._url = 'https://en.wikipedia.org/w/api.php?'
+			self.pageid = 736
+			
 		class MockResponse():
+			def __init__(self, *args):
+				pass
 			def json(self):
 				data = {
 				"query":{
@@ -65,19 +71,17 @@ class Tests_WAPIcommunicant():
 					}
 				}
 				return data
-		monkeypatch.setattr(WAPICommunicant, '__init__', lambda self: None)
+		monkeypatch.setattr(WAPICommunicant, '__init__', MockInit)
+		monkeypatch.setattr('app.wapi.requests.get', MockResponse)
 		wcommunicant = WAPICommunicant()
-		wcommunicant.response = MockResponse()
-		wcommunicant.pageid = 736
-		wcommunicant_url = 'https://en.wikipedia.org/w/api.php?'
 		result = wcommunicant.get_data_from_page()
-		assert result == """Albert Einstein ( EYEN-styne; German:
-						[ˈalbɛɐ̯t ˈʔaɪnʃtaɪn] (listen); 14 March 1879 – 18
-						April 1955) was a German-born theoretical physicist
-						who developed the theory of relativity, one of the
-						two pillars of modern physics (alongside quantum
-						mechanics). His work is also known for its influence
-						on the philosophy of science. He is best known to the
-						general public for his mass–energy equivalence formula
-						E = mc2, which has been dubbed \"the world's most
-						famous equation\"."""
+		assert result =="""Albert Einstein ( EYEN-styne; German:
+							[ˈalbɛɐ̯t ˈʔaɪnʃtaɪn] (listen); 14 March 1879 – 18
+							April 1955) was a German-born theoretical physicist
+							who developed the theory of relativity, one of the
+							two pillars of modern physics (alongside quantum
+							mechanics). His work is also known for its
+							influence on the philosophy of science. He is best
+							known to the general public for his mass–energy
+							equivalence formula E = mc2, which has been dubbed
+							\"the world's most famous equation\"."""
