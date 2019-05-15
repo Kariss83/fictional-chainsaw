@@ -48,7 +48,9 @@ class WAPICommunicant():
 			'action': 'query',
 			'format': 'json',
 			'pageids': self.pageid,
-			'prop': 'extract'
+			'prop': 'extracts',
+			'explaintext': True,
+			'exintro': True
 		}
 		response_page = requests.get(self._url, payload)
 		response_page_json = response_page.json()['query']['pages']
