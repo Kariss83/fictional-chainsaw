@@ -1,14 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Sign In</h1>
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
+    <h1>GrandPy</h1>
+    <form action="/api" method="get" novalidate>
         <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}
+            {{ form.question.label }}<br>
+            {{ form.question(size=100) }}
         </p>
         <p>{{ form.submit() }}</p>
-        <p>{{ message.said_by_grandpy}}</p>
     </form>
 {% endblock %}

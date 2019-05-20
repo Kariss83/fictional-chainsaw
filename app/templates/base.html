@@ -2,27 +2,18 @@
 <html>
     <head>
       {% if title %}
-      <title>{{ title }} - Microblog</title>
+      <title>{{ title }} - home</title>
       {% else %}
-      <title>Welcome to Microblog</title>
+      <title>Welcome to GrandPy House</title>
       {% endif %}
     </head>
     <body>
         <div>
-            Microblog:
-            <a href="/index">Home</a>
+            Our site:
+            <a href="/">Home</a>
             <a href="/grandpy">GrandPy</a>
         </div>
         <hr>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
         {% block content %}{% endblock %}
     </body>
 </html>
