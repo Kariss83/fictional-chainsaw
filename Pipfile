@@ -13,6 +13,7 @@ pylint = "*"
 googlemaps = "*"
 requests = "*"
 flask = "*"
+flask-wtf = "*"
 
 [requires]
 python_version = "3.7"

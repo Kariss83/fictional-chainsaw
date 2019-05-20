@@ -37,11 +37,4 @@ class GAPICommunicant():
         
 
 if __name__ == '__main__':
-    parser = Parser("1600 Amphitheatre Parkway, Mountain View, CA",
-        STOPWORDS,
-        ACCENTS,
-        QUESTIONS
-    )
-    parser.clean()
-    communicant = GAPICommunicant(parser)
-    print(communicant.send_requests_for_geocoding())
+    pass
